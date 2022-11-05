@@ -11,9 +11,11 @@ describe("fire web hook", () => {
   before(() => {
     ck.freeze("2022-09-23");
     process.env.WEB_HOOK = "https://slack.url/hook/id";
+    process.env.AUTH_TOKEN = "valid-token";
   });
-
   after(ck.defrost);
+  afterEach(nock.cleanAll);
+
   it("sends request to web hook", async () => {
     const webHook = nock("https://slack.url", {
       reqheaders: {
@@ -31,10 +33,32 @@ describe("fire web hook", () => {
     await quote({
       queryStringParameters: {
         type: "week",
-        push: "true",
+        push: "valid-token",
       },
     });
 
     expect(webHook.isDone()).to.equal(true);
+  });
+
+  it("does not send request to web hook if invalid authentication token", async () => {
+    const webHook = nock("https://slack.url", {
+      reqheaders: {
+
+        "content-type": "application/json",
+        "content-length": 75,
+      },
+    })
+      .post("/hook/id")
+      .reply(200);
+
+    const response = await quote({
+      queryStringParameters: {
+        type: "week",
+        push: "invalid-token",
+      },
+    });
+
+    expect(webHook.isDone()).to.equal(false);
+    expect(response).to.deep.equal({ statusCode: 401 });
   });
 });
