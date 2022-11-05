@@ -7,6 +7,7 @@
     "test": "test"
   },
   "scripts": {
+    "pretest": ":> test.log",
     "test": "mocha",
     "prebuild": "rm -f build/mitch.zip",
     "build": "zip -r build/mitch.zip lib/ data/"
