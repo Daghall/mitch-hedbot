@@ -6,5 +6,10 @@
 
 The code is run as an [AWS Lambda function](https://en.wikipedia.org/wiki/AWS_Lambda). A cron job is run with [Amazon EventBridge](https://aws.amazon.com/eventbridge/) that through a [web hook](https://api.slack.com/messaging/webhooks) integrates with a Slack app that prints one of Mitch's quotes in a pun Slack channel each Friday.
 
-
 ![Slack integration](images/slack.png)
+
+## Browser version
+
+- [Random](https://daghall.github.io/mitch-hedbot)
+- [Daily](https://daghall.github.io/mitch-hedbot?type=day)
+- [Weekly](https://daghall.github.io/mitch-hedbot?type=week)
