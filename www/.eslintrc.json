@@ -1,0 +1,6 @@
+{
+  "extends": [ "exp" ],
+  "env": {
+    "browser": true
+  }
+}

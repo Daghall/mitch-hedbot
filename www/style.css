@@ -1,0 +1,59 @@
+html {
+  height: 100%;
+}
+
+body {
+  background-color: #bf9f78;
+  color: white;
+  text-shadow: 2px 3px 4px black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 5vw;
+  margin: auto;
+  width: 85%;
+  background-image: url("mitch.jpg");
+  background-position-x: center;
+  background-size: cover;
+}
+
+article {
+  padding: 4vw;
+}
+
+main {
+  margin-top: 6vw;
+  backdrop-filter: blur(6px);
+}
+
+aside {
+  font-size: 4vw;
+  padding: 1vw;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+a,
+a:visited {
+  color: wheat;
+  text-decoration: none;
+}
+
+a:hover {
+  color: inherit;
+}
+
+@media screen and (min-width: 1000px) {
+  body {
+    font-size: 3vw;
+  }
+  aside {
+    font-size: 2vw;
+  }
+}
+
+.hidden {
+  display: none;
+}
