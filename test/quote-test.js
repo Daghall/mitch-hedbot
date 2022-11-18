@@ -2,20 +2,29 @@
 
 const ck = require("chronokinesis");
 const expect = require("chai").expect;
+const pythia = require("the-pythia");
 const quote = require("../lib/quote");
-
-const mathRandom = Math.random;
+const quotes = require("../data/mitch.json");
 
 describe("quote", () => {
   before(() => {
     ck.freeze("2022-09-23");
+    pythia.predict([ 0, 0.1337, 0.9999999999 ], { repeat: false });
   });
 
   after(ck.defrost);
 
-  it("returns random quote", async () => {
-    mockRandom();
+  it("returns random quote (top)", async () => {
+    const event = { queryStringParameters: {} };
 
+    const response = await quote.handler(event);
+    expect(response).to.deep.equal({
+      statusCode: 200,
+      body: quotes[0],
+    });
+  });
+
+  it("returns random quote", async () => {
     const event = { queryStringParameters: {} };
 
     const response = await quote.handler(event);
@@ -23,8 +32,16 @@ describe("quote", () => {
       statusCode: 200,
       body: "People tell me how hard it is to stop smoking; I think it’s about as hard as it is to start flossing.",
     });
+  });
 
-    restoreRandom();
+  it("returns random quote (bottom)", async () => {
+    const event = { queryStringParameters: {} };
+
+    const response = await quote.handler(event);
+    expect(response).to.deep.equal({
+      statusCode: 200,
+      body: quotes.slice(-1).pop(),
+    });
   });
 
   it("returns the quote of the day", async () => {
@@ -59,11 +76,3 @@ describe("quote", () => {
     });
   });
 });
-
-function mockRandom() {
-  Math.random = () => 0.1337;
-}
-
-function restoreRandom() {
-  Math.random = mathRandom;
-}
