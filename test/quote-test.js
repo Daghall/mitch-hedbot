@@ -9,7 +9,7 @@ const quotes = require("../data/mitch.json");
 describe("quote", () => {
   before(() => {
     ck.freeze("2022-09-23");
-    pythia.predict([ 0, 0.1337, 0.9999999999 ], { repeat: false });
+    pythia.predict([ 0, 0.1337, 0.9999999999, 0.1337 ], { repeat: false });
   });
 
   after(ck.defrost);
@@ -41,6 +41,19 @@ describe("quote", () => {
     expect(response).to.deep.equal({
       statusCode: 200,
       body: quotes.slice(-1).pop(),
+    });
+  });
+
+  it("returns random quote, extended", async () => {
+    const event = { queryStringParameters: { extended: "true" } };
+
+    const response = await quote.handler(event);
+    expect(response).to.deep.equal({
+      statusCode: 200,
+      body: JSON.stringify({
+        quote: "People tell me how hard it is to stop smoking; I think it’s about as hard as it is to start flossing.",
+        index: 18,
+      }),
     });
   });
 
