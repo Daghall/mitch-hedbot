@@ -31,7 +31,7 @@ describe("quote", () => {
       const response = await quote.handler(event);
       expect(response).to.deep.equal({
         statusCode: 200,
-        body: "People tell me how hard it is to stop smoking; I think it’s about as hard as it is to start flossing.",
+        body: "I got a parrot and it talked, but it did not say \"I'm hungry\", so it died.",
       });
     });
 
@@ -68,12 +68,12 @@ describe("quote", () => {
       const response = await quote.handler(event);
       expect(response).to.deep.equal({
         statusCode: 200,
-        body: "This shirt is ‘dry-clean only’ — which means it’s dirty.",
+        body: "This shirt is 'dry-clean only' — which means it's dirty.",
       });
     });
 
-    it("wraps 141 days after initial date", async () => {
-      ck.freeze("2022-12-20");
+    it("wraps 253 days after initial date", async () => {
+      ck.freeze("2023-04-11");
 
       const event = { queryStringParameters: { type: "day" } };
 
@@ -99,8 +99,8 @@ describe("quote", () => {
       expect(response).to.deep.equal({
         statusCode: 200,
         body: JSON.stringify({
-          quote: "People tell me how hard it is to stop smoking; I think it’s about as hard as it is to start flossing.",
-          index: 18,
+          quote: "I got a parrot and it talked, but it did not say \"I'm hungry\", so it died.",
+          index: 33,
         }),
       });
     });
@@ -135,7 +135,7 @@ describe("quote", () => {
       expect(response).to.deep.equal({
         statusCode: 200,
         body: JSON.stringify({
-          quote: "This shirt is ‘dry-clean only’ — which means it’s dirty.",
+          quote: "This shirt is 'dry-clean only' — which means it's dirty.",
           index: 7,
         }),
       });
@@ -144,12 +144,12 @@ describe("quote", () => {
 
   context("indexing", () => {
     it("returns quote by index", async () => {
-      const event = { queryStringParameters: { index: "18" } };
+      const event = { queryStringParameters: { index: "33" } };
 
       const response = await quote.handler(event);
       expect(response).to.deep.equal({
         statusCode: 200,
-        body: "People tell me how hard it is to stop smoking; I think it’s about as hard as it is to start flossing.",
+        body: "I got a parrot and it talked, but it did not say \"I'm hungry\", so it died.",
       });
     });
 
