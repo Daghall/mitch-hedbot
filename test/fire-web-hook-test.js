@@ -22,11 +22,11 @@ describe("fire web hook", () => {
       reqheaders: {
 
         "content-type": "application/json",
-        "content-length": 75,
+        "content-length": 69,
       },
     })
       .post("/hook/id", (body) => {
-        expect(body.text).to.equal("This shirt is ‘dry-clean only’ — which means it’s dirty.");
+        expect(body.text).to.equal("This shirt is 'dry-clean only' — which means it's dirty.");
         return true;
       })
       .reply(200);
@@ -46,11 +46,11 @@ describe("fire web hook", () => {
       reqheaders: {
 
         "content-type": "application/json",
-        "content-length": 75,
+        "content-length": 69,
       },
     })
       .post("/hook/dev", (body) => {
-        expect(body.text).to.equal("This shirt is ‘dry-clean only’ — which means it’s dirty.");
+        expect(body.text).to.equal("This shirt is 'dry-clean only' — which means it's dirty.");
         return true;
       })
       .reply(200);
